@@ -2,11 +2,14 @@
   "name": "ctf-map-poc",
   "private": true,
   "type": "module",
+  "homepage": "https://warek01.github.io/sigmoid-ctf-map-poc",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@react-router/node": "^7.4.1",
@@ -28,12 +31,16 @@
     "@types/node": "^22",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.5.3",
     "react-router-devtools": "^1.1.8",
     "tailwindcss": "^4.0.17",
     "typescript": "^5.8.2",
     "vite": "^6.2.3",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "engines": {
+    "node": "^22"
   },
   "packageManager": "pnpm@10.7.0"
 }
