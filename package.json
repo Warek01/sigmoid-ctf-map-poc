@@ -2,7 +2,7 @@
   "name": "ctf-map-poc",
   "private": true,
   "type": "module",
-  "homepage": "https://warek01.github.io/sigmoid-ctf-map-poc",
+  "homepage": "https://warek01.github.io/sigmoid-ctf-map-poc/",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
