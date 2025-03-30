@@ -1,12 +1,13 @@
-import 'leaflet/dist/leaflet.css'
 import { lazy, Suspense, useState } from 'react'
 import type { Task } from '@/types/task'
 import TaskModal from '@/components/TaskModal'
 import tasksJson from '@/data/tasks.json'
+import './leaflet.css'
+import './app.css'
 
 const Map = lazy(() => import('@/components/Map'))
 
-export default function Home() {
+export default function App() {
   const [tasks, setTasks] = useState(tasksJson)
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
 
