@@ -1,0 +1,184 @@
+[
+  {
+    "country": "Russia",
+    "title": "Test 1",
+    "description": "Some description",
+    "completed": false,
+    "complexity": 1
+  },
+  {
+    "country": "China",
+    "title": "Test 2",
+    "description": "Some description",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Kazakhstan",
+    "title": "Test 3",
+    "description": "Some description",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "United States of America",
+    "title": "USA task",
+    "description": "aaaa",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Brazil",
+    "title": "Amazon Exploration",
+    "description": "Explore the depths of the Amazon rainforest.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "India",
+    "title": "Taj Mahal Visit",
+    "description": "Experience the beauty of the Taj Mahal.",
+    "completed": false,
+    "complexity": 1
+  },
+  {
+    "country": "Germany",
+    "title": "Berlin Tour",
+    "description": "Walk through Berlin’s historical landmarks.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Australia",
+    "title": "Great Barrier Reef Dive",
+    "description": "Dive into the world’s largest coral reef.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "South Africa",
+    "title": "Safari Adventure",
+    "description": "Go on a thrilling safari in Kruger National Park.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "France",
+    "title": "Eiffel Tower Climb",
+    "description": "Climb to the top of the Eiffel Tower.",
+    "completed": false,
+    "complexity": 1
+  },
+  {
+    "country": "Canada",
+    "title": "Niagara Falls Trip",
+    "description": "Visit the breathtaking Niagara Falls.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Japan",
+    "title": "Cherry Blossom Festival",
+    "description": "Witness the beautiful cherry blossoms in spring.",
+    "completed": false,
+    "complexity": 1
+  },
+  {
+    "country": "Egypt",
+    "title": "Pyramids of Giza",
+    "description": "Explore the wonders of the pyramids.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Argentina",
+    "title": "Patagonia Adventure",
+    "description": "Explore the rugged landscapes of Patagonia.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Algeria",
+    "title": "Sahara Desert Expedition",
+    "description": "Journey through the vast Sahara Desert.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Democratic Republic of the Congo",
+    "title": "Rainforest Trek",
+    "description": "Explore the Congo Rainforest and its wildlife.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Greenland",
+    "title": "Arctic Adventure",
+    "description": "Experience the icy landscapes of Greenland.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Saudi Arabia",
+    "title": "Desert Exploration",
+    "description": "Discover the vast deserts and ancient sites.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Mexico",
+    "title": "Chichen Itza Exploration",
+    "description": "Discover the ancient Mayan ruins.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Indonesia",
+    "title": "Island Hopping",
+    "description": "Travel through Indonesia’s stunning islands.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Sudan",
+    "title": "Nile River Expedition",
+    "description": "Follow the course of the Nile through Sudan.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Ukraine",
+    "title": "Kyiv Exploration",
+    "description": "Discover the rich history and culture of Kyiv.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Moldova",
+    "title": "Wine Tour",
+    "description": "Visit Moldova’s famous underground wine cellars.",
+    "completed": false,
+    "complexity": 3
+  },
+  {
+    "country": "Romania",
+    "title": "Dracula’s Castle Visit",
+    "description": "Explore the legendary Bran Castle in Transylvania.",
+    "completed": false,
+    "complexity": 2
+  },
+  {
+    "country": "Belarus",
+    "title": "Minsk City Tour",
+    "description": "Experience the Soviet-era charm of Minsk.",
+    "completed": false,
+    "complexity": 1
+  },
+  {
+    "country": "Mongolia",
+    "title": "Gobi Desert Adventure",
+    "description": "Experience the nomadic lifestyle in the vast Gobi Desert.",
+    "completed": false,
+    "complexity": 3
+  }
+]

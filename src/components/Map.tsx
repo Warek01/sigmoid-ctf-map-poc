@@ -3,6 +3,7 @@ import type { Feature, GeoJsonObject } from 'geojson'
 import type { Map as LeafletMap, PathOptions, StyleFunction } from 'leaflet'
 import type { Task } from '@/types/task'
 import { forwardRef, memo, useEffect, useImperativeHandle, useRef } from 'react'
+import 'leaflet/dist/leaflet.css'
 
 // countries-<percentage of detail>.json
 import countriesJson from '@/data/countries-4.json'
@@ -26,36 +27,45 @@ interface Props {
   onCountrySelect: (country: string) => void
   selectedCountry: string | null
   disabled: boolean
+  width: string
+  height: string
 }
 
 const countries = countriesJson as GeoJsonObject
 
+const sharedStyle: PathOptions = {
+  opacity: 1,
+  stroke: true,
+}
+
 const countryStyle: PathOptions = {
+  ...sharedStyle,
   weight: 1,
   color: 'gray',
   fillColor: 'blue',
 }
 
 const countryStyleComplete: PathOptions = {
+  ...sharedStyle,
   weight: 1,
   color: 'gray',
   fillColor: 'gray',
 }
 
 const countryStyleHover: PathOptions = {
+  ...sharedStyle,
   weight: 2,
   color: 'black',
   fillColor: 'red',
 }
 
 const countryStyleSelected: PathOptions = {
-  weight: 2,
-  color: 'black',
-  fillColor: 'black',
+  ...countryStyleHover
 }
 
 const Map = forwardRef<MapRef, Props>((props, ref) => {
-  const { onCountrySelect, tasks, selectedCountry, disabled } = props
+  const { onCountrySelect, tasks, selectedCountry, disabled, height, width } =
+    props
   const mapRef = useRef<LeafletMap>(null)
 
   // returns the task associated with a feature
@@ -139,11 +149,12 @@ const Map = forwardRef<MapRef, Props>((props, ref) => {
 
   return (
     <MapContainer
-      className="w-[1090px] h-[880px]"
+      style={{ width, height }}
+      className="inline-block"
       ref={mapRef}
       center={[0, 0]}
-      zoom={2}
-      maxZoom={4}
+      zoom={3}
+      maxZoom={5}
       minZoom={2}
       zoomAnimation={true}
       fadeAnimation={true}
@@ -152,6 +163,11 @@ const Map = forwardRef<MapRef, Props>((props, ref) => {
       attributionControl={false}
       zoomControl={false}
       dragging={!disabled}
+      maxBounds={[
+        [-85, -180],
+        [85, 180],
+      ]}
+      maxBoundsViscosity={1.0}
     >
       <GeoJSON
         // random key is mandatory since component doesn't update on props change
