@@ -6,4 +6,8 @@
 /build/
 /dist/
 
-.idea
+.idea/
+
+.env
+.env.*
+!.env.example

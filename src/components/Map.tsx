@@ -5,6 +5,7 @@ import type { Task } from '@/types/task'
 import { forwardRef, memo, useEffect, useImperativeHandle, useRef } from 'react'
 import 'leaflet/dist/leaflet.css'
 
+import { cn } from '@/utils/cn.ts'
 // countries-<percentage of detail>.json
 import countriesJson from '@/data/countries-4.json'
 
@@ -27,8 +28,9 @@ interface Props {
   onCountrySelect: (country: string) => void
   selectedCountry: string | null
   disabled: boolean
-  width: string
-  height: string
+  width?: string
+  height?: string
+  className?: string
 }
 
 const countries = countriesJson as GeoJsonObject
@@ -60,12 +62,20 @@ const countryStyleHover: PathOptions = {
 }
 
 const countryStyleSelected: PathOptions = {
-  ...countryStyleHover
+  ...countryStyleHover,
 }
 
 const Map = forwardRef<MapRef, Props>((props, ref) => {
-  const { onCountrySelect, tasks, selectedCountry, disabled, height, width } =
-    props
+  const {
+    onCountrySelect,
+    tasks,
+    selectedCountry,
+    disabled,
+    height,
+    width,
+    className,
+  } = props
+
   const mapRef = useRef<LeafletMap>(null)
 
   // returns the task associated with a feature
@@ -150,7 +160,7 @@ const Map = forwardRef<MapRef, Props>((props, ref) => {
   return (
     <MapContainer
       style={{ width, height }}
-      className="inline-block"
+      className={cn('inline-block', className)}
       ref={mapRef}
       center={[0, 0]}
       zoom={3}
