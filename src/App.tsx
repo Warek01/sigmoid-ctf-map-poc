@@ -1,20 +1,24 @@
 import { Outlet } from 'react-router'
 import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
+import { Provider } from 'react-redux'
 
 import AppLayout from '@/components/AppLayout.tsx'
-import { TaskContextProvider } from '@/context/task.context.tsx'
+import { store } from '@/config/store.ts'
+import AuthContainer from '@/containers/Auth.container.tsx'
 
 import './app.css'
 
 export default function App() {
   return (
     <Theme appearance="dark">
-      <TaskContextProvider>
+      <Provider store={store}>
         <AppLayout>
-          <Outlet />
+          <AuthContainer>
+            <Outlet />
+          </AuthContainer>
         </AppLayout>
-      </TaskContextProvider>
+      </Provider>
     </Theme>
   )
 }

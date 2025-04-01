@@ -7,7 +7,13 @@ import 'leaflet/dist/leaflet.css'
 
 import { cn } from '@/utils/cn.ts'
 // countries-<percentage of detail>.json
-import countriesJson from '@/data/countries-4.json'
+import countriesJson from '@/data/countries-5.json'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux.ts'
+import { selectTasks } from '@/slices/task.slice.ts'
+import {
+  selectCountry,
+  selectSelectedCountry,
+} from '@/slices/ui-state.slice.ts'
 
 interface FeatureProperties {
   // full country name
@@ -24,10 +30,6 @@ interface MapRef {
 }
 
 interface Props {
-  tasks: Task[]
-  onCountrySelect: (country: string) => void
-  selectedCountry: string | null
-  disabled: boolean
   width?: string
   height?: string
   className?: string
@@ -38,27 +40,28 @@ const countries = countriesJson as GeoJsonObject
 const sharedStyle: PathOptions = {
   opacity: 1,
   stroke: true,
+  fillOpacity: 100,
 }
 
 const countryStyle: PathOptions = {
   ...sharedStyle,
   weight: 1,
-  color: 'gray',
-  fillColor: 'blue',
+  color: '#777777',
+  fillColor: 'rgba(62, 99, 221, 0.5)',
 }
 
 const countryStyleComplete: PathOptions = {
   ...sharedStyle,
   weight: 1,
-  color: 'gray',
-  fillColor: 'gray',
+  color: '#777777',
+  fillColor: '#777777',
 }
 
 const countryStyleHover: PathOptions = {
   ...sharedStyle,
   weight: 2,
-  color: 'black',
-  fillColor: 'red',
+  color: '#FFFFFF',
+  fillColor: 'rgb(62, 99, 221)',
 }
 
 const countryStyleSelected: PathOptions = {
@@ -66,16 +69,11 @@ const countryStyleSelected: PathOptions = {
 }
 
 const Map = forwardRef<MapRef, Props>((props, ref) => {
-  const {
-    onCountrySelect,
-    tasks,
-    selectedCountry,
-    disabled,
-    height,
-    width,
-    className,
-  } = props
-
+  const { height, width, className } = props
+  const tasks = useAppSelector(selectTasks)
+  const selectedCountry = useAppSelector(selectSelectedCountry)
+  const dispatch = useAppDispatch()
+  const disabled = !!selectedCountry
   const mapRef = useRef<LeafletMap>(null)
 
   // returns the task associated with a feature
@@ -114,8 +112,8 @@ const Map = forwardRef<MapRef, Props>((props, ref) => {
         e.target.setStyle(mapStyleToFeature(feature))
       },
       click: (e) => {
-        if (!disabled && task && !task.completed) {
-          onCountrySelect(task.country)
+        if (!disabled && task) {
+          dispatch(selectCountry(task.country))
         }
       },
     })
@@ -159,7 +157,7 @@ const Map = forwardRef<MapRef, Props>((props, ref) => {
 
   return (
     <MapContainer
-      style={{ width, height }}
+      style={{ width, height, background: 'transparent' }}
       className={cn('inline-block', className)}
       ref={mapRef}
       center={[0, 0]}

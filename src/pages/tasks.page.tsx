@@ -1,8 +1,10 @@
-import { useTasks } from '@/hooks/use-tasks.ts'
-import { Checkbox, Code, Heading, Table } from '@radix-ui/themes'
+import { Checkbox, Code, Table } from '@radix-ui/themes'
+
+import { useAppSelector } from '@/hooks/redux.ts'
+import { selectTasks } from '@/slices/task.slice.ts'
 
 export default function TasksPage() {
-  const { tasks } = useTasks()
+  const tasks = useAppSelector(selectTasks)
 
   return (
     <div className="px-4">

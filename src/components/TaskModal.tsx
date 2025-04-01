@@ -3,31 +3,41 @@ import {
   Button,
   Code,
   Dialog,
-  Flex,
   Text,
   TextArea,
-  TextField,
 } from '@radix-ui/themes'
+import Markdown from 'react-markdown'
 
-import type { Task } from '@/types/task'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux.ts'
+import { completeTask, selectTaskByCountry } from '@/slices/task.slice.ts'
+import {
+  selectCountry,
+  selectSelectedCountry,
+} from '@/slices/ui-state.slice.ts'
 
-interface Props {
-  task: Task
-  onComplete: (task: Task) => void
-  onClose: () => void
-}
+export default function TaskModal() {
+  const dispatch = useAppDispatch()
+  const selectedCountry = useAppSelector(selectSelectedCountry)
+  const task = useAppSelector(selectTaskByCountry(selectedCountry))
 
-export default function TaskModal({ task, onComplete, onClose }: Props) {
+  const handleComplete = () => {
+    dispatch(completeTask(task!))
+    dispatch(selectCountry(null))
+  }
+
   return (
-    <Dialog.Root open={!!task} onOpenChange={onClose}>
+    <Dialog.Root
+      open={!!task}
+      onOpenChange={() => dispatch(selectCountry(null))}
+    >
       <Dialog.Content>
         {task && (
           <>
             <Dialog.Title>{task.title}</Dialog.Title>
             <div className="flex flex-col gap-1">
-              <Dialog.Description>
-                <Blockquote>{task.description}</Blockquote>
-              </Dialog.Description>
+              <Blockquote className="task-description">
+                <Markdown>{task.description}</Markdown>
+              </Blockquote>
               <Text as="p">Country: {task.country}</Text>
               <Text as="p">
                 Complexity: <Code>{task.complexity}</Code>
@@ -39,10 +49,7 @@ export default function TaskModal({ task, onComplete, onClose }: Props) {
             </div>
 
             <div className="flex justify-end gap-3">
-              <Button
-                onClick={() => onComplete(task)}
-                disabled={task.completed}
-              >
+              <Button onClick={handleComplete} disabled={task.completed}>
                 Complete
               </Button>
               <Dialog.Close>

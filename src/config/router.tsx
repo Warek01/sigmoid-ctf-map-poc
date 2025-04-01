@@ -8,10 +8,13 @@ import HomePage from '@/pages/home.page.tsx'
 import MapPage from '@/pages/map.page.tsx'
 import TasksPage from '@/pages/tasks.page.tsx'
 import App from '@/App'
+import { AppRoute } from '@/config/app-route.ts'
+import LoginPage from '@/pages/login.page.tsx'
+import RegisterPage from '@/pages/register.page.tsx'
 
 const routes: RouteObject[] = [
   {
-    path: '/',
+    path: AppRoute.HOME,
     element: <App />,
     children: [
       {
@@ -19,12 +22,20 @@ const routes: RouteObject[] = [
         element: <HomePage />,
       },
       {
-        path: 'map',
+        path: AppRoute.MAP,
         element: <MapPage />,
       },
       {
-        path: 'tasks',
+        path: AppRoute.TASKS,
         element: <TasksPage />,
+      },
+      {
+        path: AppRoute.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: AppRoute.REGISTER,
+        element: <RegisterPage />,
       },
     ],
   },

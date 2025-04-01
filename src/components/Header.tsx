@@ -1,41 +1,66 @@
 import { Button, DropdownMenu, Progress, TabNav } from '@radix-ui/themes'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 
-import { useTasks } from '@/hooks/use-tasks.ts'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux.ts'
+import {
+  completeTask,
+  resetTask,
+  selectCompletedTasks,
+  selectTasks,
+  selectUncompletedTasks,
+} from '@/slices/task.slice.ts'
+import { AppRoute } from '@/config/app-route.ts'
+import { selectUser, setUser } from '@/slices/user.slice.ts'
+import { userMock } from '@/mocks/user.mock.ts'
+import { cn } from '@/utils/cn.ts'
 
 const tabs = [
   {
-    path: '/',
+    path: AppRoute.HOME,
     text: 'Home',
   },
   {
-    path: '/map',
+    path: AppRoute.MAP,
     text: 'Map',
   },
   {
-    path: '/tasks',
+    path: AppRoute.TASKS,
     text: 'Tasks',
   },
 ]
 
 export default function Header() {
   const { pathname } = useLocation()
-  const { completedTasks, tasks, completeTask, resetTask, uncompletedTasks } =
-    useTasks()
+  const dispatch = useAppDispatch()
+  const tasks = useAppSelector(selectTasks)
+  const completedTasks = useAppSelector(selectCompletedTasks)
+  const uncompletedTasks = useAppSelector(selectUncompletedTasks)
+  const user = useAppSelector(selectUser)
+  const navigate = useNavigate()
 
   const completePercentage = (completedTasks.length / tasks.length) * 100
 
   const resetAll = () => {
-    completedTasks.forEach((t) => resetTask(t))
+    completedTasks.forEach((t) => dispatch(resetTask(t)))
   }
 
   const completeAll = () => {
-    uncompletedTasks.forEach((t) => completeTask(t))
+    uncompletedTasks.forEach((t) => dispatch(completeTask(t)))
+  }
+
+  const logOut = () => {
+    dispatch(setUser(null))
+    navigate(AppRoute.REGISTER)
+  }
+
+  const logIn = () => {
+    dispatch(setUser(userMock))
+    navigate(AppRoute.LOGIN)
   }
 
   return (
     <header className="flex max-h-10 h-10 w-screen px-4">
-      <TabNav.Root>
+      <TabNav.Root className={cn(!user && 'pointer-events-none')}>
         {tabs.map(({ text, path }) => (
           <TabNav.Link asChild key={path} active={pathname === path}>
             <Link to={path}>{text}</Link>
@@ -55,6 +80,9 @@ export default function Header() {
             <DropdownMenu.Item onClick={resetAll}>Reset</DropdownMenu.Item>
             <DropdownMenu.Item onClick={completeAll}>
               Complete all
+            </DropdownMenu.Item>
+            <DropdownMenu.Item onClick={user ? logOut : logIn}>
+              {user ? 'Log out' : 'Log in'}
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
