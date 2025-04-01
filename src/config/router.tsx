@@ -10,7 +10,8 @@ import TasksPage from '@/pages/tasks.page.tsx'
 import App from '@/App'
 
 const routes: RouteObject[] = [
-  { path: '/',
+  {
+    path: '/',
     element: <App />,
     children: [
       {
