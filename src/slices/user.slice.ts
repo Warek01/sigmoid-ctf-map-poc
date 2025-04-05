@@ -9,7 +9,7 @@ interface UserSliceState {
 }
 
 const initialState: UserSliceState = {
-  user: null,
+  user: userMock,
 }
 
 export const USER_SLICE_NAME = 'user'
